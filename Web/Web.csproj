@@ -3,8 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <CodeAnalysisRuleSet>../Rulez.ruleset</CodeAnalysisRuleSet>
-    <ApplicationInsightsResourceId>/subscriptions/3ee3eda0-a8ce-4788-b543-cb49be50dfbf/resourcegroups/Default-Web-WestEurope/providers/microsoft.insights/components/dnyceskehopiva2018</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/3ee3eda0-a8ce-4788-b543-cb49be50dfbf/resourcegroups/Default-Web-WestEurope/providers/microsoft.insights/components/dnyceskehopiva2018</ApplicationInsightsAnnotationResourceId>
     <UserSecretsId>kumiko</UserSecretsId>        
   </PropertyGroup>
 
