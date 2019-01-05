@@ -1,0 +1,26 @@
+﻿@model ErrorIndex
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+     <style type="text/css">
+        html { height: 100%; }
+         body { height: 100%; width: 100%;font-family: 'Nixie One', cursive; display: table; position: absolute; }
+        .jumbotron { display: table-cell; vertical-align: middle; }
+        h1 { font-family: 'Monoton', cursive;}
+        img { width: 183px; height: 150px;}        
+    </style>
+</head>
+<body>
+<div class="jumbotron text-center">
+    <h1>Ooopppsss</h1>                
+    <h3>Request ID: <code>@Model.RequestId</code></h3>    
+</div>
+</body>
+</html>

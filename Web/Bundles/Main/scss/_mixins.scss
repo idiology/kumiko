@@ -1,0 +1,61 @@
+﻿@mixin list-reset($margin: 0, $padding: 0, $li-margin: 0, $li-padding: 0, $background: transparent) {
+    margin: $margin;
+    padding: $padding;
+
+    li {
+        list-style: none;
+        background: $background;
+        margin: $li-margin;
+        padding: $li-padding;
+    }
+}
+
+@mixin pseudo($display: block, $position: absolute, $content: '') {
+    content: $content;
+    display: $display;
+    position: $position;
+}
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transform($transform) {
+    -ms-transform: #{$transform}; /* IE 9 */
+    -webkit-transform: #{$transform}; /* Safari */
+    transform: #{$transform};
+}
+
+@mixin transition($transition) {
+    -webkit-transition: $transition; /* Safari */
+    transition: $transition;
+}
+
+@mixin transition-delay($delay) {
+    -webkit-transition-delay: $delay; /* Safari */
+    transition-delay: $delay;
+}
+
+@mixin transform-origin($origin) {
+    -ms-transform-origin: $origin;
+    -webkit-transform-origin: $origin;
+    transform-origin: $origin;
+}
+@mixin fontello() {
+    font-family: "Icons";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

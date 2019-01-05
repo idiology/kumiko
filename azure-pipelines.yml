@@ -1,0 +1,42 @@
+resources:
+- repo: self
+pool:
+  vmImage: 'ubuntu-16.04'
+variables:
+  MagicName: 'kumiko'
+steps:
+- task: Docker@1
+  displayName: 'Build an image'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryConnection: Frohikey    
+    dockerFile: Web/Dockerfile
+    useDefaultContext: false
+    buildContext: .
+    imageName: 'frohikey/$(MagicName):$(Build.BuildNumber)'
+    includeLatestTag: true    
+- task: Docker@0
+  displayName: 'Push an image'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryConnection: Frohikey
+    action: 'Push an image'
+    imageName: 'frohikey/$(MagicName):$(Build.BuildNumber)'
+    includeLatestTag: true
+    includeSourceTags: false
+- task: Kubernetes@1
+  displayName: 'Kubectl set image version'
+  inputs:
+    azureSubscriptionEndpoint: Azure
+    azureResourceGroup: roboti
+    kubernetesCluster: hibiki
+    command: set
+    arguments: 'image deployments/$(MagicName) $(MagicName)=frohikey/$(MagicName):$(Build.BuildNumber)'
+
+
+
+
+
+
+
+

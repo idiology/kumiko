@@ -1,0 +1,10 @@
+/Library/bin
+/Library/obj
+/Web/bin
+/Web/obj
+/Web/node_modules
+/Web/wwwroot/assets
+.vs
+run.cmd
+build.cmd
+

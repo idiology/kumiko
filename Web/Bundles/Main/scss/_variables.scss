@@ -1,0 +1,52 @@
+﻿$brand-primary: #F37021;
+$text-color: #000;
+
+// alerts
+$alert-border-radius: 0;
+
+$alert-info-bg: #333;
+$alert-info-border: #333;
+$alert-info-text: #FFF;
+
+$alert-danger-bg: transparent;
+$alert-danger-border: #F37021;
+$alert-danger-text: #F37021;
+
+// inputs
+$input-border-radius: 0;
+$input-border: #333;
+$input-border-focus: #333;
+
+// buttons
+$btn-border-radius-base: 0;
+$btn-border-radius-large: 0;
+$btn-border-radius-small: 0;
+
+// btn-default-color, $btn-default-bg, $btn-default-border
+$btn-default-border: #333;
+
+// fonts
+$font-size-base: 14px;
+$font-family-base: 'Helvetica Neue LT Pro', sans-serif;
+$font-size-h1: 32px;
+$font-size-h2: floor(($font-size-base * 1.4));
+
+//navbar
+$navbar-default-bg: #fff;
+$navbar-default-link-color: $text-color;
+$navbar-default-link-active-bg: #fff;
+$navbar-default-link-active-color: $brand-primary;
+$navbar-border-radius: 0;
+
+
+// wells
+$border-radius-base: 0;
+$border-radius-large: 0;
+$border-radius-small: 0;
+$well-bg: #333;
+$well-border: #333;
+
+// aplayer
+$aplayer-height: 66px;
+$lrc-height: 30px;
+$aplayer-height-lrc: $aplayer-height + $lrc-height - 6;

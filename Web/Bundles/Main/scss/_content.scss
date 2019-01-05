@@ -1,0 +1,74 @@
+﻿.map {
+    height: 300px;
+    margin-top: 30px;
+}
+
+.speakers {
+    margin-top: 40px;
+    text-align: center;
+
+    @media (min-width: $screen-sm-min) {
+        text-align: left;
+    }
+
+    .speaker {
+        @include clearfix();
+        margin-bottom: 40px;
+
+        .picture {
+            margin-bottom: 20px;
+
+            @media (min-width: $screen-sm-min) {
+                float: left;
+                padding-right: 30px;
+                width: 30%;
+                margin-bottom: 0;
+            }
+
+            img {
+                max-width: 100%;
+
+                @media (min-width: $screen-sm-min) {
+                    width: 100%;
+                }
+            }
+        }
+
+        .content {
+            @media (min-width: $screen-sm-min) {
+                float: left;
+                width: 70%;
+            }
+
+            h2, h3 {
+                color: $text-color;
+                margin-top: 0;
+            }
+
+            h2 {
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            h3 {
+                margin-bottom: 40px;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+.video-helper {
+    margin-bottom: 30px;
+    padding-top: 56.338028%;
+    position: relative;
+}
+
+.video-helper > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
