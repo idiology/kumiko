@@ -80,7 +80,7 @@ namespace Web
         {
             var provider = new FileExtensionContentTypeProvider();
             provider.Mappings[".webmanifest"] = "application/manifest+json";
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

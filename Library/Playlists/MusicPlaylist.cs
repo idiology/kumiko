@@ -96,11 +96,11 @@ namespace Library.Playlists
                 {
                     var segments = playlistUri.Segments;
                     var sn = segments.Count();
-                    
+
                     if (sn > 0)
                     {
                         var finalSegments = segments.Take(sn - 1);
-                        
+
                         var u = url
                             .ResetToRoot()
                             .AppendPathSegments(finalSegments)

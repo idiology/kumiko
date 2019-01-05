@@ -24,11 +24,7 @@
 
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <Content Remove="wwwroot\assets\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services" />
-  </ItemGroup>
+  </ItemGroup>  
 
   <ItemGroup>
     <Folder Include="Bundles\Main\fontello\" />
