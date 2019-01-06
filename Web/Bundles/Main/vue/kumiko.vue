@@ -3,7 +3,7 @@
         <loading :active="loading" type="rotating-square" :fullscreen="true"></loading> 
         <alert type="danger" :errors="errors"></alert>
         <div v-if="playlist != null && music != null && !loading">
-            <aplayer :music="music" :list="playlist" :listMaxHeight="listMaxHeight" />
+            <aplayer :music="music" :list="playlist" :listMaxHeight="listMaxHeight" shuffle repeat="list" />
         </div>
     </div>
 </template>

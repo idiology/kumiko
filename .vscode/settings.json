@@ -5,12 +5,14 @@
         "Healthz",
         "Kumiko",
         "aplayer",
+        "bootstraprc",
         "browserslist",
         "kore",
         "mozjpeg",
         "nani",
         "persistedstate",
         "polyfill",
-        "vuex"
+        "vuex",
+        "wwwroot"
     ]
 }

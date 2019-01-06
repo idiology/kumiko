@@ -369,7 +369,7 @@
         get () {
           return this.internalShuffle
         },
-        set (val) {
+        set (val) {          
           canUseSync && this.$emit('update:shuffle', val)
           this.internalShuffle = val
         }
@@ -517,10 +517,10 @@
 
       // playlist
 
-      getShuffledList () {
+      getShuffledList () {              
         if (!this.list.length) {
           return [this.internalMusic]
-        }
+        }        
         let unshuffled = [...this.list]
         if (!this.internalShuffle || unshuffled.length <= 1) {
           return unshuffled

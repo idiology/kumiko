@@ -9,9 +9,7 @@
       @dragging="val => $emit('dragging', val)"
     />
     <div class="aplayer-time">
-      <div class="aplayer-time-inner">
-        - <span class="aplayer-ptime">{{secondToTime(stat.playedTime)}}</span> / <span
-        class="aplayer-dtime">{{secondToTime(stat.duration)}}</span>
+      <div class="aplayer-time-inner"> - <span class="aplayer-ptime">{{secondToTime(stat.playedTime)}}</span> / <span class="aplayer-dtime">{{secondToTime(stat.duration)}}</span>
       </div>
       <volume
         v-if="!$parent.isMobile"
