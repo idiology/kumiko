@@ -7,7 +7,7 @@
 
 ```Still work in progress!```
 
-[![Kumiko](screenshot.jpg)]
+![Kumiko](screenshot.jpg)
 
 # Acknowledgements
 
