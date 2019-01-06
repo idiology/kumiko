@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div id="aplayer"
     class="aplayer"
     :class="{
       'aplayer-mini': mini,
@@ -44,8 +44,11 @@
           @nextmode="setNextMode"
         />
       </div>
+    </div>    
+    <audio ref="audio" crossorigin="anonymous"></audio>
+    <div style="padding-top: 10px;">
+      <av-line ref-link="audio" :cors-anonym="true" :canv-width="globalWidth" line-width="0.5" line-color="#999" :fft-size="1024"></av-line>
     </div>
-    <audio ref="audio"></audio>
     <music-list
       :show="showList && !mini"
       :current-music="currentMusic"
@@ -63,6 +66,9 @@
   import MusicList from './components/aplayer-list.vue'
   import Controls from './components/aplayer-controller.vue'
   import { deprecatedProp, versionCompare, warn } from './utils'
+
+  import AudioVisual from 'vue-audio-visual'
+  Vue.use(AudioVisual)
 
   let versionBadgePrinted = false
   const canUseSync = versionCompare(Vue.version, '2.3.0') >= 0
@@ -218,6 +224,7 @@
     },
     data () {
       return {
+        globalWidth: 934,
         internalMusic: this.music,
         isPlaying: false,
         isSeeking: false,
@@ -262,7 +269,7 @@
         shuffledList: []
       }
     },
-    computed: {
+    computed: {      
       // alias for $refs.audio
       audio () {
         return this.$refs.audio
@@ -369,7 +376,7 @@
         get () {
           return this.internalShuffle
         },
-        set (val) {          
+        set (val) {
           canUseSync && this.$emit('update:shuffle', val)
           this.internalShuffle = val
         }
@@ -517,10 +524,10 @@
 
       // playlist
 
-      getShuffledList () {              
+      getShuffledList () {
         if (!this.list.length) {
           return [this.internalMusic]
-        }        
+        }
         let unshuffled = [...this.list]
         if (!this.internalShuffle || unshuffled.length <= 1) {
           return unshuffled
@@ -805,12 +812,13 @@
       }
     },
     created () {
-      this.shuffledList = this.getShuffledList()
+      this.shuffledList = this.getShuffledList()            
     },
     mounted () {
       this.initAudio()
       this.setSelfAdaptingTheme()
       if (this.autoplay) this.play()
+      this.globalWidth = 934; // $('#aplayer').width()
     },
     beforeDestroy () {
       if (activeMutex === this) {
@@ -893,7 +901,7 @@
             color: #666;
           }
 
-          .aplayer-type {            
+          .aplayer-type {
             display: inline-block;
             font-size: 12px;
             color: #666;

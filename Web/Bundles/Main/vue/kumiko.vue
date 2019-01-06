@@ -2,7 +2,7 @@
     <div>
         <loading :active="loading" type="rotating-square" :fullscreen="true"></loading> 
         <alert type="danger" :errors="errors"></alert>
-        <div v-if="playlist != null && music != null && !loading">
+        <div v-if="playlist != null && music != null && !loading">           
             <aplayer :music="music" :list="playlist" :listMaxHeight="listMaxHeight" shuffle repeat="list" />
         </div>
     </div>
@@ -10,11 +10,11 @@
 <script>
   import Vue from 'vue'
   import axios from 'axios'
-  import Aplayer from '../../vue-aplayer-kumiko/src/vue-aplayer.vue'
+  import Aplayer from '../../vue-aplayer-kumiko/src/vue-aplayer.vue'  
   import { Loading, Alert } from 'vue-nani-kore'
 
   Vue.component('alert', Alert)
-  Vue.component('loading', Loading)
+  Vue.component('loading', Loading)  
 
   export default {
     components: {
@@ -34,7 +34,7 @@
     computed: {
       listMaxHeight () {
         const l = 44
-        const minus = 7 * l
+        const minus = 9 * l
         let final = 0
         let max = Math.max(
           document.documentElement.clientHeight,
