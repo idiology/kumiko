@@ -172,16 +172,6 @@ h2 {
     margin: 50px 0;
 }
 
-.hr, hr {
-    @include box-shadow(none);
-    height: 1px;
-    background: url(images/hr.png) no-repeat center top;
-    background-size: 100%;
-    width: 100%;
-    border: 0 none;
-    margin: 25px 0;
-}
-
 .table-plain {
     border: 0;
 

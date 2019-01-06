@@ -6,3 +6,8 @@
 [![docker](https://img.shields.io/docker/pulls/frohikey/kumiko.svg)](https://hub.docker.com/r/frohikey/kumiko)
 
 ```TODO```
+
+# Acknowledgements
+
+- Kumiko character - Chibi Headphones by PinkTails
+- Forked Player from VUE Aplayer by Shenghao "Doma" Lei

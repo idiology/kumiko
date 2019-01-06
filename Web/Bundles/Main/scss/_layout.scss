@@ -4,6 +4,10 @@
 body {
     min-height: 100%;
     position: relative;    
+    background-attachment: fixed;
+    background-color: #F7F7F7;
+    background-image: url(images/bg.png);
+    background-repeat: repeat;
 }
 .navbar-default {
     border: 0;
@@ -31,20 +35,6 @@ body {
     .navbar-brand {
         padding-top: 2px;
         padding-bottom: 0;
-    }
-}
-header {
-    background: #fbfbfb;
-    .container {
-        padding-top: 23px;
-        padding-bottom: 19px;
-        @media (min-width: $screen-sm-min) {
-            background: url(images/squiggle.jpg) no-repeat right bottom;
-        }
-        
-        img {
-            max-width: 100%;
-        }
     }
 }
 
