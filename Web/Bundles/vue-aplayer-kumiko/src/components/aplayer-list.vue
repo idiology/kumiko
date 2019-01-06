@@ -126,8 +126,8 @@ export default {
 
       .aplayer-list-cur {
         display: none;
-        width: 3px;
-        height: 22px;
+        width: 4px;
+        height: 34px;
         position: absolute;
         left: 0;
         top: 5px;
