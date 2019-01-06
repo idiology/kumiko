@@ -22,8 +22,10 @@
       />
       <div class="aplayer-info" v-show="!mini">
         <div class="aplayer-music">
-          <span class="aplayer-title">{{ currentMusic.title || 'Untitled' }}</span>
-          <span class="aplayer-author">{{ currentMusic.artist || 'Unknown' }}</span>
+          <span class="aplayer-title">{{ currentMusic.title || 'Untitled' }}</span><br/>
+          <span class="aplayer-author">{{ currentMusic.artist || 'Unknown' }}</span><br/>
+          <span class="aplayer-anime">{{ currentMusic.anime || 'Unknown' }}</span><br/>
+          <span class="aplayer-type">{{ currentMusic.type || 'Unknown' }}</span>
         </div>        
         <controls
           :shuffle="shouldShuffle"
@@ -74,15 +76,14 @@
   // mutex playing instance
   let activeMutex = null
 
-
   const REPEAT = {
     NONE: 'none',
     MUSIC: 'music',
     LIST: 'list',
     NO_REPEAT: 'no-repeat',
     REPEAT_ONE: 'repeat-one',
-    REPEAT_ALL: 'repeat-all',
-  };
+    REPEAT_ALL: 'repeat-all'
+  }
 
   const VueAPlayer = {
     name: 'APlayer',
@@ -90,7 +91,7 @@
     components: {
       Thumbnail,
       Controls,
-      MusicList,      
+      MusicList
     },
     props: {
       music: {
@@ -98,29 +99,29 @@
         required: true,
         validator (song) {
           return !song.src
-        },
+        }
       },
       list: {
         type: Array,
         default () {
           return []
-        },
+        }
       },
       mini: {
         type: Boolean,
-        default: false,
+        default: false
       },
       showLrc: {
         type: Boolean,
-        default: false,
+        default: false
       },
       mutex: {
         type: Boolean,
-        default: true,
+        default: true
       },
       theme: {
         type: String,
-        default: '#ff9933',
+        default: '#ff9933'
       },
 
       listMaxHeight: String,
@@ -130,7 +131,7 @@
        */
       listFolded: {
         type: Boolean,
-        default: false,
+        default: false
       },
 
       /**
@@ -138,7 +139,7 @@
        */
       float: {
         type: Boolean,
-        default: false,
+        default: false
       },
 
       // Audio attributes as props
@@ -152,7 +153,7 @@
        */
       autoplay: {
         type: Boolean,
-        default: false,
+        default: false
       },
 
       /**
@@ -164,7 +165,7 @@
        */
       controls: {
         type: Boolean,
-        default: false,
+        default: false
       },
 
       /**
@@ -173,7 +174,7 @@
        */
       muted: {
         type: Boolean,
-        default: false,
+        default: false
       },
       /**
        * @since 1.4.0
@@ -190,7 +191,7 @@
         default: 0.8,
         validator (value) {
           return value >= 0 && value <= 1
-        },
+        }
       },
 
       // play order control
@@ -203,7 +204,7 @@
        */
       shuffle: {
         type: Boolean,
-        default: false,
+        default: false
       },
       /**
        * @since 1.5.0
@@ -212,8 +213,8 @@
        */
       repeat: {
         type: String,
-        default: REPEAT.NO_REPEAT,
-      },
+        default: REPEAT.NO_REPEAT
+      }
     },
     data () {
       return {
@@ -225,14 +226,13 @@
         playStat: {
           duration: 0,
           loadedTime: 0,
-          playedTime: 0,
+          playedTime: 0
         },
         showList: !this.listFolded,
 
         // handle Promise returned from audio.play()
         // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
         audioPlayPromise: Promise.resolve(),
-
 
         // @since 1.2.0 float mode
 
@@ -241,10 +241,8 @@
         floatOffsetLeft: 0,
         floatOffsetTop: 0,
 
-
         // @since 1.3.0 self adapting theme
         selfAdaptingTheme: null,
-
 
         // @since 1.4.0
         // sync muted, volume
@@ -256,13 +254,12 @@
         // Loading indicator
         isLoading: false,
 
-
         // @since 1.5.1
         // sync shuffle, repeat
         internalShuffle: this.shuffle,
         internalRepeat: this.repeat,
         // for shuffling
-        shuffledList: [],
+        shuffledList: []
       }
     },
     computed: {
@@ -279,7 +276,7 @@
         set (val) {
           canUseSync && this.$emit('update:music', val)
           this.internalMusic = val
-        },
+        }
       },
 
       // props wrappers
@@ -298,9 +295,9 @@
         return this.list
       },
       shouldShowNativeControls () {
-        return process.env.NODE_ENV !== 'production' &&
-          this.controls &&
-          !this.mini
+        return (
+          process.env.NODE_ENV !== 'production' && this.controls && !this.mini
+        )
       },
 
       // useful
@@ -308,14 +305,18 @@
       floatStyleObj () {
         // transform: translate(floatOffsetLeft, floatOffsetY)
         return {
-          transform: `translate(${this.floatOffsetLeft}px, ${this.floatOffsetTop}px)`,
-          webkitTransform: `translate(${this.floatOffsetLeft}px, ${this.floatOffsetTop}px)`,
+          transform: `translate(${this.floatOffsetLeft}px, ${
+            this.floatOffsetTop
+          }px)`,
+          webkitTransform: `translate(${this.floatOffsetLeft}px, ${
+            this.floatOffsetTop
+          }px)`
         }
       },
       currentPicStyleObj () {
         if (this.currentMusic && this.currentMusic.pic) {
           return {
-            backgroundImage: `url(${this.currentMusic.pic})`,
+            backgroundImage: `url(${this.currentMusic.pic})`
           }
         }
         return {}
@@ -334,7 +335,7 @@
         },
         set (val) {
           this.currentMusic = this.shuffledList[val % this.shuffledList.length]
-        },
+        }
       },
       shouldRepeat () {
         return this.repeatMode !== REPEAT.NO_REPEAT
@@ -350,7 +351,7 @@
         set (val) {
           canUseSync && this.$emit('update:muted', val)
           this.internalMuted = val
-        },
+        }
       },
       audioVolume: {
         get () {
@@ -359,9 +360,8 @@
         set (val) {
           canUseSync && this.$emit('update:volume', val)
           this.internalVolume = val
-        },
+        }
       },
-
 
       // since 1.5.0
       // sync shuffle, repeat
@@ -372,7 +372,7 @@
         set (val) {
           canUseSync && this.$emit('update:shuffle', val)
           this.internalShuffle = val
-        },
+        }
       },
       repeatMode: {
         get () {
@@ -390,8 +390,8 @@
         set (val) {
           canUseSync && this.$emit('update:repeat', val)
           this.internalRepeat = val
-        },
-      },
+        }
+      }
     },
     methods: {
       // Float mode
@@ -443,14 +443,16 @@
         // handle .play() Promise
         const audioPlayPromise = this.audio.play()
         if (audioPlayPromise) {
-          return this.audioPlayPromise = new Promise((resolve, reject) => {
+          return (this.audioPlayPromise = new Promise((resolve, reject) => {
             // rejectPlayPromise is to force reject audioPlayPromise if it's still pending when pause() is called
             this.rejectPlayPromise = reject
-            audioPlayPromise.then((res) => {
-              this.rejectPlayPromise = null
-              resolve(res)
-            }).catch(warn)
-          })
+            audioPlayPromise
+              .then(res => {
+                this.rejectPlayPromise = null
+                resolve(res)
+              })
+              .catch(warn)
+          }))
         }
       },
       pause () {
@@ -545,7 +547,10 @@
         if (indexOfCurrentMusic !== -1) {
           indexOfCurrentMusic = unshuffled.indexOf(this.internalMusic)
           if (indexOfCurrentMusic !== 0) {
-            [unshuffled[0], unshuffled[indexOfCurrentMusic]] = [unshuffled[indexOfCurrentMusic], unshuffled[0]]
+            [unshuffled[0], unshuffled[indexOfCurrentMusic]] = [
+              unshuffled[indexOfCurrentMusic],
+              unshuffled[0]
+            ]
           }
         }
 
@@ -583,7 +588,9 @@
       },
       onAudioProgress () {
         if (this.audio.buffered.length) {
-          this.playStat.loadedTime = this.audio.buffered.end(this.audio.buffered.length - 1)
+          this.playStat.loadedTime = this.audio.buffered.end(
+            this.audio.buffered.length - 1
+          )
         } else {
           this.playStat.loadedTime = 0
         }
@@ -604,7 +611,10 @@
       onAudioEnded () {
         // determine next song according to shuffle and repeat
         if (this.repeatMode === REPEAT.REPEAT_ALL) {
-          if (this.shouldShuffle && this.playIndex === this.shuffledList.length - 1) {
+          if (
+            this.shouldShuffle &&
+            this.playIndex === this.shuffledList.length - 1
+          ) {
             this.shuffledList = this.getShuffledList()
           }
           this.playIndex++
@@ -622,7 +632,6 @@
       },
 
       initAudio () {
-
         // since 1.4.0 Audio attributes as props
 
         this.audio.controls = this.shouldShowNativeControls
@@ -630,29 +639,40 @@
         this.audio.preload = this.preload
         this.audio.volume = this.volume
 
-
         // since 1.4.0 Emit as many native audio events
         // @see https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Media_events
 
         const mediaEvents = [
           'abort',
-          'canplay', 'canplaythrough',
+          'canplay',
+          'canplaythrough',
           'durationchange',
-          'emptied', 'encrypted', 'ended', 'error',
-          'interruptbegin', 'interruptend',
-          'loadeddata', 'loadedmetadata', 'loadstart',
+          'emptied',
+          'encrypted',
+          'ended',
+          'error',
+          'interruptbegin',
+          'interruptend',
+          'loadeddata',
+          'loadedmetadata',
+          'loadstart',
           'mozaudioavailable',
-          'pause', 'play', 'playing', 'progress',
+          'pause',
+          'play',
+          'playing',
+          'progress',
           'ratechange',
-          'seeked', 'seeking', 'stalled', 'suspend',
+          'seeked',
+          'seeking',
+          'stalled',
+          'suspend',
           'timeupdate',
           'volumechange',
-          'waiting',
+          'waiting'
         ]
         mediaEvents.forEach(event => {
           this.audio.addEventListener(event, e => this.$emit(event, e))
         })
-
 
         // event handlers
         // they don't emit native media events
@@ -669,7 +689,6 @@
         this.audio.addEventListener('timeupdate', this.onAudioTimeUpdate)
         this.audio.addEventListener('volumechange', this.onAudioVolumeChange)
         this.audio.addEventListener('ended', this.onAudioEnded)
-
 
         if (this.currentMusic) {
           this.audio.src = this.currentMusic.src
@@ -696,7 +715,7 @@
         } else {
           this.selfAdaptingTheme = null
         }
-      },
+      }
     },
     watch: {
       music (music) {
@@ -711,7 +730,10 @@
           const src = music.src
           // HLS support
           if (/\.m3u8(?=(#|\?|$))/.test(src)) {
-            if (this.audio.canPlayType('application/x-mpegURL') || this.audio.canPlayType('application/vnd.apple.mpegURL')) {
+            if (
+              this.audio.canPlayType('application/x-mpegURL') ||
+              this.audio.canPlayType('application/vnd.apple.mpegURL')
+            ) {
               this.audio.src = src
             } else {
               try {
@@ -735,7 +757,7 @@
             this.audio.src = src
           }
           // self-adapting theme color
-        },
+        }
       },
 
       // since 1.4.0
@@ -763,19 +785,22 @@
         this.internalVolume = val
       },
 
-
       // sync shuffle, repeat
       shuffle (val) {
         this.internalShuffle = val
       },
       repeat (val) {
         this.internalRepeat = val
-      },
+      }
     },
     beforeCreate () {
       if (!VueAPlayer.disableVersionBadge && !versionBadgePrinted) {
         // version badge
-        console.log(`\n\n %c Vue-APlayer ${VERSION} %c vue-aplayer.js.org \n`, 'color: #fff; background:#41b883; padding:5px 0;', 'color: #fff; background: #35495e; padding:5px 0;')
+        console.log(
+          `\n\n %c Vue-APlayer ${VERSION} %c vue-aplayer.js.org \n`,
+          'color: #fff; background:#41b883; padding:5px 0;',
+          'color: #fff; background: #35495e; padding:5px 0;'
+        )
         versionBadgePrinted = true
       }
     },
@@ -794,11 +819,10 @@
       if (this.hls) {
         this.hls.destroy()
       }
-    },
+    }
   }
 
   export default VueAPlayer
-
 </script>
 
 <style lang="scss">
@@ -842,7 +866,7 @@
           flex-grow: 1;
 
           overflow: hidden;
-          white-space: nowrap;
+          // white-space: nowrap;
           text-overflow: ellipsis;
           margin-left: 5px;
           user-select: text;
@@ -850,10 +874,27 @@
           padding-bottom: 2px;
 
           .aplayer-title {
-            font-size: 14px;
+            font-size: 18px;
+            color: #ff9933;
+            display: inline-block;
           }
 
           .aplayer-author {
+            padding-top: 16px;
+            display: inline-block;
+            font-size: 16px;
+            color: #666;
+          }
+
+          .aplayer-anime {
+            padding-top: 14px;
+            display: inline-block;
+            font-size: 12px;
+            color: #666;
+          }
+
+          .aplayer-type {            
+            display: inline-block;
             font-size: 12px;
             color: #666;
           }
@@ -913,10 +954,10 @@
 
   @keyframes aplayer-roll {
     0% {
-      left: 0
+      left: 0;
     }
     100% {
-      left: -100%
+      left: -100%;
     }
   }
 </style>
