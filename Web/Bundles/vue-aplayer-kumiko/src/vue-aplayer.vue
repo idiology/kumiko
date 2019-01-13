@@ -36,6 +36,7 @@
           :theme="currentTheme"
           @toggleshuffle="shouldShuffle = !shouldShuffle"
           @togglelist="showList = !showList"
+          @togglespectrum="showSpectrum = !showSpectrum"
           @togglemute="toggleMute"
           @setvolume="setAudioVolume"
           @dragbegin="onProgressDragBegin"
@@ -46,7 +47,7 @@
       </div>
     </div>    
     <audio ref="audio" crossorigin="anonymous"></audio>
-    <div style="padding-top: 10px;">
+    <div style="padding-top: 10px;" v-show="showSpectrum">
       <av-line ref-link="audio" :cors-anonym="true" :canv-width="globalWidth" :line-width="0.5" line-color="#999" :fft-size="1024"></av-line>
     </div>
     <music-list
@@ -131,6 +132,12 @@
       },
 
       listMaxHeight: String,
+
+      spectrumFolded: {
+        type: Boolean,
+        default: true
+      },
+
       /**
        * @since 1.4.1
        * Fold playlist initially
@@ -236,6 +243,7 @@
           playedTime: 0
         },
         showList: !this.listFolded,
+        showSpectrum: !this.spectrumFolded,
 
         // handle Promise returned from audio.play()
         // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play

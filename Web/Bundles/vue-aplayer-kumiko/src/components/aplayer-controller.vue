@@ -1,42 +1,14 @@
 <template>
   <div class="aplayer-controller">
-    <v-progress
-      :loadProgress="loadProgress"
-      :playProgress="playProgress"
-      :theme="theme"
-      @dragbegin="val => $emit('dragbegin', val)"
-      @dragend="val => $emit('dragend', val)"
-      @dragging="val => $emit('dragging', val)"
-    />
+    <v-progress :loadProgress="loadProgress" :playProgress="playProgress" :theme="theme" @dragbegin="val => $emit('dragbegin', val)" @dragend="val => $emit('dragend', val)" @dragging="val => $emit('dragging', val)" />
     <div class="aplayer-time">
       <div class="aplayer-time-inner"> - <span class="aplayer-ptime">{{secondToTime(stat.playedTime)}}</span> / <span class="aplayer-dtime">{{secondToTime(stat.duration)}}</span>
       </div>
-      <volume
-        v-if="!$parent.isMobile"
-        :volume="volume"
-        :theme="theme"
-        :muted="muted"
-        @togglemute="$emit('togglemute')"
-        @setvolume="v => $emit('setvolume', v)"
-      />
-      <icon-button
-        class="aplayer-icon-mode"
-        icon="shuffle"
-        :class="{ 'inactive': !shuffle }"
-        @click.native="$emit('toggleshuffle')"
-      />
-      <icon-button
-        class="aplayer-icon-mode"
-        :icon="repeat === 'repeat-one' ? 'repeat-one' : 'repeat-all'"
-        :class="{ 'inactive': repeat === 'no-repeat'}"
-        @click.native="$emit('nextmode')"
-      />
-      <icon-button
-        class="aplayer-icon-menu"
-        icon="menu"
-        :class="{ 'inactive': !$parent.showList }"
-        @click.native="$emit('togglelist')"
-      />
+      <volume v-if="!$parent.isMobile" :volume="volume" :theme="theme" :muted="muted" @togglemute="$emit('togglemute')" @setvolume="v => $emit('setvolume', v)" />
+      <icon-button class="aplayer-icon-mode" icon="shuffle" :class="{ 'inactive': !shuffle }" @click.native="$emit('toggleshuffle')" />
+      <icon-button class="aplayer-icon-mode" :icon="repeat === 'repeat-one' ? 'repeat-one' : 'repeat-all'" :class="{ 'inactive': repeat === 'no-repeat'}" @click.native="$emit('nextmode')" />
+      <icon-button class="aplayer-icon-mode" icon="spectrum" :class="{ 'inactive': !$parent.showSpectrum }" @click.native="$emit('togglespectrum')" />
+      <icon-button class="aplayer-icon-menu" icon="menu" :class="{ 'inactive': !$parent.showList }" @click.native="$emit('togglelist')" />      
     </div>
   </div>
 </template>
@@ -50,7 +22,7 @@
     components: {
       IconButton,
       VProgress,
-      Volume,
+      Volume
     },
     props: ['shuffle', 'repeat', 'stat', 'theme', 'volume', 'muted'],
     computed: {
@@ -61,29 +33,32 @@
       playProgress () {
         if (this.stat.duration === 0) return 0
         return this.stat.playedTime / this.stat.duration
-      },
+      }
     },
     methods: {
       secondToTime (second) {
         if (isNaN(second)) {
           return '00:00'
         }
-        const pad0 = (num) => {
+        const pad0 = num => {
           return num < 10 ? '0' + num : '' + num
         }
 
         const min = Math.trunc(second / 60)
         const sec = Math.trunc(second - min * 60)
         const hours = Math.trunc(min / 60)
-        const minAdjust = Math.trunc((second / 60) - (60 * Math.trunc((second / 60) / 60)))
-        return second >= 3600 ? pad0(hours) + ':' + pad0(minAdjust) + ':' + pad0(sec) : pad0(min) + ':' + pad0(sec)
-      },
-    },
+        const minAdjust = Math.trunc(
+          second / 60 - 60 * Math.trunc(second / 60 / 60)
+        )
+        return second >= 3600
+          ? pad0(hours) + ':' + pad0(minAdjust) + ':' + pad0(sec)
+          : pad0(min) + ':' + pad0(sec)
+      }
+    }
   }
 </script>
 
 <style lang="scss">
-
   .aplayer-controller {
     display: flex;
     align-items: center;
@@ -109,7 +84,7 @@
         margin-left: 4px;
 
         &.inactive {
-          opacity: .3;
+          opacity: 0.3;
         }
 
         .aplayer-fill {
@@ -124,7 +99,7 @@
 
         &.aplayer-icon-menu {
           display: none;
-        }
+        }        
       }
       .aplayer-volume-wrap + .aplayer-icon {
         margin-left: 0;
@@ -134,12 +109,11 @@
         .aplayer-icon-mode {
           display: none;
         }
-
-        .aplayer-icon-menu {
+        
+        .aplayer-icon-spectrum {
           display: none;
         }
       }
     }
   }
-
 </style>
