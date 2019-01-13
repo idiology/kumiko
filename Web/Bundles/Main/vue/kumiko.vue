@@ -39,7 +39,7 @@
         let max = Math.max(
           document.documentElement.clientHeight,
           window.innerHeight || 0
-        )
+        )        
 
         max -= minus
 
