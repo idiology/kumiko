@@ -10,11 +10,11 @@
 <script>
   import Vue from 'vue'
   import axios from 'axios'
-  import Aplayer from '../../vue-aplayer-kumiko/src/vue-aplayer.vue'  
+  import Aplayer from '../../vue-aplayer-kumiko/src/vue-aplayer.vue'
   import { Loading, Alert } from 'vue-nani-kore'
 
   Vue.component('alert', Alert)
-  Vue.component('loading', Loading)  
+  Vue.component('loading', Loading)
 
   export default {
     components: {
@@ -67,7 +67,8 @@
             axios.spread(playlist => {
               self.playlist = playlist.data
               if (self.playlist != null && self.playlist.length > 0) {
-                self.music = self.playlist[0]
+                var index = Math.floor(Math.random() * self.playlist.length)                                
+                self.music = self.playlist[index]
               }
               self.loading = false
             })
