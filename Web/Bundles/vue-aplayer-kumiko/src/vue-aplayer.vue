@@ -47,7 +47,7 @@
     </div>    
     <audio ref="audio" crossorigin="anonymous"></audio>
     <div style="padding-top: 10px;">
-      <av-line ref-link="audio" :cors-anonym="true" :canv-width="globalWidth" line-width="0.5" line-color="#999" :fft-size="1024"></av-line>
+      <av-line ref-link="audio" :cors-anonym="true" :canv-width="globalWidth" :line-width="0.5" line-color="#999" :fft-size="1024"></av-line>
     </div>
     <music-list
       :show="showList && !mini"
@@ -104,7 +104,7 @@
         type: Object,
         required: true,
         validator (song) {
-          return !song.src
+          return (song.src || '') != ''
         }
       },
       list: {
@@ -269,7 +269,7 @@
         shuffledList: []
       }
     },
-    computed: {      
+    computed: {
       // alias for $refs.audio
       audio () {
         return this.$refs.audio
@@ -804,7 +804,7 @@
       if (!VueAPlayer.disableVersionBadge && !versionBadgePrinted) {
         // version badge
         console.log(
-          `\n\n %c Vue-APlayer ${VERSION} %c vue-aplayer.js.org \n`,
+          `\n\n %c KUMIKO ${VERSION} %c github.com/idiology/kumiko \n`,
           'color: #fff; background:#41b883; padding:5px 0;',
           'color: #fff; background: #35495e; padding:5px 0;'
         )
@@ -812,13 +812,13 @@
       }
     },
     created () {
-      this.shuffledList = this.getShuffledList()            
+      this.shuffledList = this.getShuffledList()
     },
     mounted () {
       this.initAudio()
       this.setSelfAdaptingTheme()
       if (this.autoplay) this.play()
-      this.globalWidth = 934; // $('#aplayer').width()
+      this.globalWidth = 934 // $('#aplayer').width()
     },
     beforeDestroy () {
       if (activeMutex === this) {

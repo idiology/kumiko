@@ -1,8 +1,5 @@
 <template>
-  <button
-    type="button"
-    class="aplayer-icon"
-  >
+  <button type="button" class="aplayer-icon">
     <icon :type="icon"/>
   </button>
 </template>

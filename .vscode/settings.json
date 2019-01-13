@@ -15,5 +15,8 @@
         "polyfill",
         "vuex",
         "wwwroot"
+    ],
+    "npm.includeDirectories": [
+        "Web"
     ]
 }
