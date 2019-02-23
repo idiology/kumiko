@@ -1,11 +1,16 @@
 ﻿<template>
-    <div>
-        <loading :active="loading" type="rotating-square" :fullscreen="true"></loading> 
-        <alert type="danger" :errors="errors"></alert>
-        <div v-if="playlist != null && music != null && !loading">           
-            <aplayer :music="music" :list="playlist" :listMaxHeight="listMaxHeight" shuffle repeat="list" />
-        </div>
+  <div>
+    <loading :active="loading" type="rotating-square" :fullscreen="true"></loading>
+    <alert type="danger" :errors="errors"></alert>
+    <div v-if="playlist != null && music != null && !loading">
+      <aplayer
+        :music="music"
+        :list="playlist"        
+        shuffle
+        repeat="list"
+      />
     </div>
+  </div>
 </template>
 <script>
   import Vue from 'vue'
@@ -30,34 +35,7 @@
     },
     created () {
       this.loadPlaylist()
-    },
-    computed: {
-      listMaxHeight () {
-        const l = 44
-        const minus = 9 * l
-        let final = 0
-        let max = Math.max(
-          document.documentElement.clientHeight,
-          window.innerHeight || 0
-        )        
-
-        max -= minus
-
-        if (max < 0) {
-          return ''
-        }
-
-        while (true) {
-          final += l
-          if (final > max) {
-            final -= l
-            break
-          }
-        }
-
-        return final + 'px'
-      }
-    },
+    },    
     methods: {
       loadPlaylist () {
         let self = this
@@ -67,7 +45,7 @@
             axios.spread(playlist => {
               self.playlist = playlist.data
               if (self.playlist != null && self.playlist.length > 0) {
-                var index = Math.floor(Math.random() * self.playlist.length)                                
+                var index = Math.floor(Math.random() * self.playlist.length)
                 self.music = self.playlist[index]
               }
               self.loading = false

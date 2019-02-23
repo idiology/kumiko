@@ -1,5 +1,6 @@
 <template>
-  <div id="aplayer"
+  <div
+    id="aplayer"
     class="aplayer"
     :class="{
       'aplayer-mini': mini,
@@ -22,11 +23,14 @@
       />
       <div class="aplayer-info" v-show="!mini">
         <div class="aplayer-music">
-          <span class="aplayer-title">{{ currentMusic.title || 'Untitled' }}</span><br/>
-          <span class="aplayer-author">{{ currentMusic.artist || 'Unknown' }}</span><br/>
-          <span class="aplayer-anime">{{ currentMusic.anime || 'Unknown' }}</span><br/>
+          <span class="aplayer-title">{{ currentMusic.title || 'Untitled' }}</span>
+          <br>
+          <span class="aplayer-author">{{ currentMusic.artist || 'Unknown' }}</span>
+          <br>
+          <span class="aplayer-anime">{{ currentMusic.anime || 'Unknown' }}</span>
+          <br>
           <span class="aplayer-type">{{ currentMusic.type || 'Unknown' }}</span>
-        </div>        
+        </div>
         <controls
           :shuffle="shouldShuffle"
           :repeat="repeatMode"
@@ -45,10 +49,17 @@
           @nextmode="setNextMode"
         />
       </div>
-    </div>    
+    </div>
     <audio ref="audio" crossorigin="anonymous"></audio>
     <div style="padding-top: 10px;" v-show="showSpectrum">
-      <av-line ref-link="audio" :cors-anonym="true" :canv-width="globalWidth" :line-width="0.5" line-color="#999" :fft-size="1024"></av-line>
+      <av-line
+        ref-link="audio"
+        :cors-anonym="true"
+        :canv-width="globalWidth"
+        :line-width="0.5"
+        line-color="#999"
+        :fft-size="1024"
+      ></av-line>
     </div>
     <music-list
       :show="showList && !mini"
@@ -130,9 +141,6 @@
         type: String,
         default: '#ff9933'
       },
-
-      listMaxHeight: String,
-
       spectrumFolded: {
         type: Boolean,
         default: true
@@ -291,6 +299,41 @@
         set (val) {
           canUseSync && this.$emit('update:music', val)
           this.internalMusic = val
+        }
+      },
+
+      // css stuff
+
+      listMaxHeight: {
+        get () {
+          const l = 44
+
+          const minus = 9 * l
+          let final = 0
+          let max = Math.max(
+            document.documentElement.clientHeight,
+            window.innerHeight || 0
+          )
+
+          max -= minus
+
+          if (!this.showSpectrum) {
+            max += 80
+          }
+
+          if (max < 0) {
+            return ''
+          }
+
+          while (true) {
+            final += l
+            if (final > max) {
+              final -= l
+              break
+            }
+          }
+
+          return final + 'px'
         }
       },
 
