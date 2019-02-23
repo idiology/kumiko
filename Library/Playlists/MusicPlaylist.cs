@@ -52,6 +52,13 @@ namespace Library.Playlists
                     foreach (var s in songs)
                     {
                         s.Src = GetFixedSrc(_kumiko.Playlist, s.Src);
+
+                        if (s.Title == null)
+                        {
+                            var uri = new Uri(s.Src);
+                            
+                            s.Title = Path.GetFileNameWithoutExtension(uri.LocalPath);                            
+                        }                        
                     }
 
                     return songs.OrderBy(x => x.Src);

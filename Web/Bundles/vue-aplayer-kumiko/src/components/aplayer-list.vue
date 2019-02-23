@@ -5,7 +5,7 @@
         <li v-for="(aMusic, index) of musicList" :key="index" :class="{'aplayer-list-light': aMusic === currentMusic}" @click="$emit('selectsong', aMusic)">
           <span class="aplayer-list-cur" :style="{background: theme}"></span>
           <span class="aplayer-list-index">{{ showIndex(index) }}</span>
-          <div class="aplayer-list-left">{{ aMusic.title || 'Untitled' }}<br /><span class="second">{{ aMusic.artist || 'Unknown' }}</span></div>          
+          <div class="aplayer-list-left">{{ aMusic.title || '?' }}<br /><span class="second">{{ aMusic.artist || '?' }}</span></div>          
           <div class="aplayer-list-right">{{ aMusic.anime }} <span class="second">{{ aMusic.type }}</span></div>
         </li>
       </ol>
