@@ -6,7 +6,7 @@
           <span class="aplayer-list-cur" :style="{background: theme}"></span>
           <span class="aplayer-list-index">{{ showIndex(index) }}</span>
           <div class="aplayer-list-left">{{ aMusic.title || '?' }}<br /><span class="second">{{ aMusic.artist || '?' }}</span></div>          
-          <div class="aplayer-list-right">{{ aMusic.anime }} <span class="second">{{ aMusic.type }}</span></div>
+          <div class="aplayer-list-right">{{ aMusic.info }} <span class="second">{{ aMusic.type }}</span></div>
         </li>
       </ol>
     </div>

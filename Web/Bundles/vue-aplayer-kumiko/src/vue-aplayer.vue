@@ -27,7 +27,7 @@
           <br>
           <span class="aplayer-author">{{ currentMusic.artist || 'Unknown' }}</span>
           <br>
-          <span class="aplayer-anime">{{ currentMusic.anime || 'Unknown' }}</span>
+          <span class="aplayer-info">{{ currentMusic.info || 'Unknown' }}</span>
           <br>
           <span class="aplayer-type">{{ currentMusic.type || 'Unknown' }}</span>
         </div>
@@ -948,7 +948,7 @@
             color: #666;
           }
 
-          .aplayer-anime {
+          .aplayer-info {
             padding-top: 14px;
             display: inline-block;
             font-size: 12px;

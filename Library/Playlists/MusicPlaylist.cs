@@ -41,6 +41,7 @@ namespace Library.Playlists
             using (var input = new StringReader(content))
             {
                 var deserializer = new DeserializerBuilder()
+                    .IgnoreUnmatchedProperties()
                     .WithNamingConvention(new CamelCaseNamingConvention())
                     .Build();
 
