@@ -24,8 +24,5 @@
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <Content Remove="wwwroot\assets\**" />
   </ItemGroup>  
-
-  <ItemGroup>
-    <Folder Include="Bundles\Main\fontello\" />
-  </ItemGroup>
+  
 </Project>

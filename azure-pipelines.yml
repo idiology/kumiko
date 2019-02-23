@@ -32,11 +32,3 @@ steps:
     kubernetesCluster: hibiki
     command: set
     arguments: 'image deployments/$(MagicName) $(MagicName)=frohikey/$(MagicName):$(Build.BuildNumber)'
-
-
-
-
-
-
-
-
