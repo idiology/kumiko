@@ -53,6 +53,7 @@
     <audio ref="audio" crossorigin="anonymous"></audio>
     <div style="padding-top: 10px;" v-show="showSpectrum">
       <av-line
+        v-if="spectrumInitialized"
         ref-link="audio"
         :cors-anonym="true"
         :canv-width="globalWidth"
@@ -69,7 +70,7 @@
       :listmaxheight="listMaxHeight"
       :theme="currentTheme"
       @selectsong="onSelectSong"
-    />
+    />    
   </div>
 </template>
 <script type="text/babel">
@@ -79,7 +80,7 @@
   import Controls from './components/aplayer-controller.vue'
   import { deprecatedProp, versionCompare, warn } from './utils'
 
-  import AudioVisual from '../../vue-audio-visual-kumiko/src/index.js'
+  import AudioVisual from 'vue-audio-visual'
   Vue.use(AudioVisual)
 
   let versionBadgePrinted = false
@@ -238,7 +239,7 @@
       }
     },
     data () {
-      return {
+      return {        
         globalWidth: 934,
         internalMusic: this.music,
         isPlaying: false,
@@ -252,6 +253,7 @@
         },
         showList: !this.listFolded,
         showSpectrum: !this.spectrumFolded,
+        spectrumInitialized: false,
 
         // handle Promise returned from audio.play()
         // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
@@ -501,6 +503,7 @@
         // handle .play() Promise
         const audioPlayPromise = this.audio.play()
         if (audioPlayPromise) {
+          this.spectrumInitialized = true
           return (this.audioPlayPromise = new Promise((resolve, reject) => {
             // rejectPlayPromise is to force reject audioPlayPromise if it's still pending when pause() is called
             this.rejectPlayPromise = reject
