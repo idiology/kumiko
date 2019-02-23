@@ -36,7 +36,7 @@
     computed: {
       listHeightStyle () {
         return {
-          height: `${2 * 22 * (this.musicList.length - 1)}px`,
+          height: `${(2 * 22 * (this.musicList.length)) + 2}px`,
           maxHeight: this.listmaxheight || ''
         }
       },
