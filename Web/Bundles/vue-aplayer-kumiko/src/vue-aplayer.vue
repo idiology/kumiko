@@ -79,7 +79,7 @@
   import Controls from './components/aplayer-controller.vue'
   import { deprecatedProp, versionCompare, warn } from './utils'
 
-  import AudioVisual from 'vue-audio-visual'
+  import AudioVisual from '../../vue-audio-visual-kumiko/src/index.js'
   Vue.use(AudioVisual)
 
   let versionBadgePrinted = false
