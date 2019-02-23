@@ -97,7 +97,7 @@
     position: relative;
     height: $aplayer-height;
     width: 167px; // $aplayer-height;
-    // background-image: url(../default.jpg);
+    background-image: url(../default.jpg);
     background-size: cover;
     transition: all 0.3s ease;
     cursor: pointer;

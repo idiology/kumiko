@@ -1,4 +1,4 @@
-# Kumiko 久美子
+![Kumiko](kumiko.png)
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
 [![.NETCore 2.2](https://img.shields.io/badge/.NETCore-2.2-blue.svg)](https://github.com/dotnet/core)
@@ -7,9 +7,10 @@
 
 ```Still work in progress!```
 
-![Kumiko](screenshot.jpg)
+![Screenshot](screenshot.jpg)
 
 # Acknowledgements
 
-- Kumiko character - Chibi Headphones by PinkTails
-- Forked Player from VUE Aplayer by Shenghao "Doma" Lei
+- Kumiko character - Chibi Headphones by [PinkTails](https://www.deviantart.com/pinktails)
+- Forked Player from [VUE Aplayer](https://github.com/SevenOutman/vue-aplayer) by [Shenghao "Doma" Lei](https://seven.ooo/)
+- Logo based on vector graphics by [vector_corp](https://www.freepik.com/free-photos-vectors/background)
