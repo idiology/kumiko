@@ -7,19 +7,14 @@ using Library.Playlists;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Sushi2;
-using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,7 +44,7 @@ namespace Web
 
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
-                services.AddMvc(config => config.Filters.Add(typeof(ApplicationExceptionFilter<Library.Exceptions.AppException>)))
+                services.AddMvc(config => config.Filters.Add(typeof(ApplicationExceptionFilter<AppException>)))
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.Formatting = Formatting.None;
@@ -64,7 +59,7 @@ namespace Web
             {
                 services.AddMvc(config =>
                 {
-                    config.Filters.Add(typeof(ApplicationExceptionFilter<Library.Exceptions.AppException>));
+                    config.Filters.Add(typeof(ApplicationExceptionFilter<AppException>));
                     config.Filters.Add(new AllowAnonymousFilter());
                 })
                 .AddJsonOptions(options =>
