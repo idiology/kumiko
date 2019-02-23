@@ -57,9 +57,12 @@ namespace Library.Playlists
                         if (s.Title == null)
                         {
                             var uri = new Uri(s.Src);
-                            
-                            s.Title = Path.GetFileNameWithoutExtension(uri.LocalPath);                            
-                        }                        
+
+                            s.Title = Path.GetFileNameWithoutExtension(uri.LocalPath);
+                        }
+
+                        if (s.Pic != null)
+                            s.Pic = GetFixedSrc(_kumiko.Playlist, s.Pic);
                     }
 
                     return songs.OrderBy(x => x.Src);
